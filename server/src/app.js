@@ -9,7 +9,10 @@ const app = express();
 
 // Middlewares...........................
 // CORS Enable
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true
+}));
 
 // Parse cookies and JSON bodies
 app.use(cookieParser());
