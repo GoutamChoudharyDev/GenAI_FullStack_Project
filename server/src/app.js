@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import UserRoutes from "./routes/user.route.js";
+import InterviewRoutes from "./routes/interview.route.js"
 
 // Initialize express app
 const app = express();
@@ -22,6 +23,7 @@ app.use(express.json());
 
 // Api Endpoints.........................
 app.use("/api/auth", UserRoutes)
+app.use("/api/interview", InterviewRoutes)
 
 // Default route.........................
 app.get('/', (req, res) => {

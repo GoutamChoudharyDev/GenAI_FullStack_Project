@@ -87,7 +87,11 @@ const interviewReportSchema = new Schema({
     technicalQuestions: [technicalQuestionSchema],
     behavioralQuestions: [behavioralQuestionSchema],
     skillGaps: [skillGapSchema],
-    preparationPlan: [preperationPlanSchema]
+    preparationPlan: [preperationPlanSchema],
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    }
 },
     { timestamps: true }
 );

@@ -1,5 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
-import { json, z } from "zod";
+import { z } from "zod";
 import { zodToJsonSchema } from "zod-to-json-schema";
 
 // Initialize the Google GenAI client
@@ -33,22 +33,76 @@ const interviewReportSchema = z.object({
 export const generateInterviewReport = async ({ resume, selfDescription, jobDescription }) => {
     try {
         // prompt
+        //         const prompt = `
+        // You are an AI interview preparation assistant.
+
+        // Analyze the candidate information and generate an interview preparation report.
+
+        // IMPORTANT RULES:
+        // - Return ONLY valid JSON
+        // - Do NOT add explanations
+        // - Do NOT add additional fields
+        // - Follow the provided schema exactly
+
+        // The JSON must contain ONLY these keys:
+        // technicalQuestions
+        // behavioralQuestions
+        // skillGaps
+        // preparationPlan
+
+        // Candidate Information:
+
+        // Resume:
+        // ${resume}
+
+        // Self Description:
+        // ${selfDescription}
+
+        // Job Description:
+        // ${jobDescription}
+        // `;
+
         const prompt = `
 You are an AI interview preparation assistant.
 
-Analyze the candidate information and generate an interview preparation report.
+Generate a structured interview preparation report.
 
 IMPORTANT RULES:
 - Return ONLY valid JSON
 - Do NOT add explanations
-- Do NOT add additional fields
-- Follow the provided schema exactly
+- Follow the schema strictly
 
-The JSON must contain ONLY these keys:
-technicalQuestions
-behavioralQuestions
-skillGaps
-preparationPlan
+Example format:
+
+{
+ "technicalQuestions":[
+  {
+   "questions":"What is closure in JavaScript?",
+   "intention":"To test understanding of lexical scope",
+   "answers":"Explain closure with example..."
+  }
+ ],
+ "behavioralQuestions":[
+  {
+   "questions":"Tell me about a challenge you solved",
+   "intention":"Check problem solving ability",
+   "answers":"Use STAR method"
+  }
+ ],
+ "skillGaps":[
+  {
+   "skill":"System Design",
+   "severity":"Medium"
+  }
+ ],
+ "preparationPlan":[
+  {
+   "day":1,
+   "focus":"JavaScript fundamentals",
+   "tasks":"Revise closures, promises and async/await"
+  }
+ ]
+}
 
 Candidate Information:
 
@@ -63,7 +117,7 @@ ${jobDescription}
 `;
 
         const response = await ai.models.generateContent({
-            model: "gemini-2.5-flash-lite",
+            model: "gemini-2.5-flash",
             contents: prompt,
             config: {
                 responseMimeType: "application/json",
@@ -74,6 +128,8 @@ ${jobDescription}
 
         const data = JSON.parse(response.text);
         console.log(data);
+        // console.log(typeof(data));
+        return data;
 
     } catch (error) {
         console.log("Error in genereateInterviewReport", error)
