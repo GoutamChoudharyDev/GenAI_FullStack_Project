@@ -32,35 +32,6 @@ const interviewReportSchema = z.object({
 
 export const generateInterviewReport = async ({ resume, selfDescription, jobDescription }) => {
     try {
-        // prompt
-        //         const prompt = `
-        // You are an AI interview preparation assistant.
-
-        // Analyze the candidate information and generate an interview preparation report.
-
-        // IMPORTANT RULES:
-        // - Return ONLY valid JSON
-        // - Do NOT add explanations
-        // - Do NOT add additional fields
-        // - Follow the provided schema exactly
-
-        // The JSON must contain ONLY these keys:
-        // technicalQuestions
-        // behavioralQuestions
-        // skillGaps
-        // preparationPlan
-
-        // Candidate Information:
-
-        // Resume:
-        // ${resume}
-
-        // Self Description:
-        // ${selfDescription}
-
-        // Job Description:
-        // ${jobDescription}
-        // `;
 
         const prompt = `
 You are an AI interview preparation assistant.

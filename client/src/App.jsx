@@ -3,6 +3,7 @@ import Login from "./features/auth/pages/Login"
 import Register from "./features/auth/pages/Register"
 import { AuthProvider } from "./features/auth/AuthContext"
 import ProtectedRoute from "./features/auth/components/ProtectedRoute"
+import Home from "./features/interview/pages/Home"
 
 const App = () => {
   return (
@@ -23,7 +24,7 @@ const App = () => {
           element={
             <ProtectedRoute>
               <div className="min-h-screen flex items-center justify-center bg-[#242424]">
-                <h1 className="text-3xl font-bold text-white">Welcome to the Home Page!</h1>
+                <Home />
               </div>
             </ProtectedRoute>
           }
