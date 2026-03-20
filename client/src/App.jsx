@@ -8,57 +8,61 @@ import InterviewDashboard from "./features/interview/pages/InterviewDashboard"
 import TechnicalQuestions from "./features/interview/pages/TechnicalQuestions"
 import BehaviouralQuestions from "./features/interview/pages/BehaviouralQuestions"
 import RoadMap from "./features/interview/pages/RoadMap"
+import { InterviewProvider } from "./features/auth/InterviewContext"
 
 const App = () => {
   return (
     <AuthProvider>
-      <Routes>
-        <Route
-          path="/login"
-          element={<Login />}
-        />
+      <InterviewProvider>
 
-        <Route
-          path="/register"
-          element={<Register />}
-        />
+        <Routes>
+          <Route
+            path="/login"
+            element={<Login />}
+          />
 
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/register"
+            element={<Register />}
+          />
 
-        <Route
-          path="/interview/:type"
-          element={
-            <ProtectedRoute>
-              <InterviewDashboard />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="/interview/:type"
-          element={
-            <ProtectedRoute>
-              <BehaviouralQuestions />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/interview/:type"
+            element={
+              <ProtectedRoute>
+                <InterviewDashboard />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="/interview/roadmap"
-          element={
-            <ProtectedRoute>
-              <RoadMap />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
+          <Route
+            path="/interview/:type"
+            element={
+              <ProtectedRoute>
+                <BehaviouralQuestions />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/interview/roadmap"
+            element={
+              <ProtectedRoute>
+                <RoadMap />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </InterviewProvider>
     </AuthProvider>
   )
 }

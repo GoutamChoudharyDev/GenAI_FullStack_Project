@@ -1,4 +1,7 @@
+import { useInterview } from "../../../auth/InterviewContext";
+
 const JobDescription = () => {
+  const { jobDesc, setJobDesc } = useInterview();
   return (
     <div className="bg-white/95 rounded-lg shadow-sm p-8">
 
@@ -17,6 +20,8 @@ const JobDescription = () => {
       </p>
 
       <textarea
+        value={jobDesc}
+        onChange={(e) => setJobDesc(e.target.value)}
         placeholder="Paste the job title and description here..."
         className="w-full text-gray-700 h-48 p-4 border border-gray-300 rounded-lg resize-none"
       />

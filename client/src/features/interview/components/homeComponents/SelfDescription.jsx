@@ -1,4 +1,8 @@
+import { useInterview } from "../../../auth/InterviewContext";
+
 const SelfDescription = () => {
+  const { selfDesc, setSelfDesc } = useInterview();
+
   return (
     <div className="bg-white/95 rounded-lg shadow-sm p-8 lg:col-span-2">
 
@@ -17,6 +21,8 @@ const SelfDescription = () => {
       </p>
 
       <textarea
+        value={selfDesc}
+        onChange={(e) => setSelfDesc(e.target.value)}
         placeholder="Write about yourself..."
         className="w-full text-gray-700 h-32 p-4 border border-gray-300 rounded-lg resize-none"
       />

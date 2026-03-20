@@ -1,16 +1,28 @@
 import { Upload } from "lucide-react";
 import { useState } from "react";
+import { useInterview } from "../../../auth/InterviewContext";
+
 
 const UploadResume = () => {
     // useStates....
-    const [resumeFile, setResumeFile] = useState(null)
+    const { resumeFile, setResumeFile } = useInterview();
     const [isDragging, setIsDragging] = useState(false);
 
     // handleFileChange
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            setResumeFile(file)
+            if (file.type !== "application/pdf") {
+                alert("Only PDF allowed");
+                return;
+            }
+
+            if (file.size > 5 * 1024 * 1024) {
+                alert("File size must be less than 5MB");
+                return;
+            }
+
+            setResumeFile(file);
         }
     }
 
@@ -28,7 +40,7 @@ const UploadResume = () => {
     // handleDrop
     const handleDrop = (e) => {
         e.preventDefault();
-        setIsDragging(true);
+        setIsDragging(false);
 
         const file = e.dataTransfer.files[0];
         if (file) {
