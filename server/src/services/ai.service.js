@@ -10,14 +10,14 @@ const ai = new GoogleGenAI({
 // Define the schema for the interview report using Zod
 const interviewReportSchema = z.object({
     technicalQuestions: z.array(z.object({
-        questions: z.string().describe("Technical question can be asked during the interview"),
+        question: z.string().describe("Technical question can be asked during the interview"),
         intention: z.string().describe("Intention of interviewer behind asking the question"),
-        answers: z.string().describe("How to answer the question, what points to be covered, what approach to be used, etc.")
+        answer: z.string().describe("How to answer the question, what points to be covered, what approach to be used, etc.")
     })).describe("Technical questions that can be asked during the interview, along with the intention of the interviewer alwong with their intention and how to answer them"),
     behavioralQuestions: z.array(z.object({
-        questions: z.string().describe("Behavioral question can be asked during the interview"),
+        question: z.string().describe("Behavioral question can be asked during the interview"),
         intention: z.string().describe("Intention of interviewer behind asking the question"),
-        answers: z.string().describe("How to answer the question, what points to be covered, what approach to be used, etc.")
+        answer: z.string().describe("How to answer the question, what points to be covered, what approach to be used, etc.")
     })).describe("Behavioral questions that can be asked during the interview, along with the intention of the interviewer and how to answer them"),
     skillGaps: z.array(z.object({
         skill: z.string().describe("Skill that the candidate is lacking based on the resume and job describe analysis"),
@@ -48,16 +48,16 @@ Example format:
 {
  "technicalQuestions":[
   {
-   "questions":"What is closure in JavaScript?",
+   "question":"What is closure in JavaScript?",
    "intention":"To test understanding of lexical scope",
-   "answers":"Explain closure with example..."
+   "answer":"Explain closure with example..."
   }
  ],
  "behavioralQuestions":[
   {
-   "questions":"Tell me about a challenge you solved",
+   "question":"Tell me about a challenge you solved",
    "intention":"Check problem solving ability",
-   "answers":"Use STAR method"
+   "answer":"Use STAR method"
   }
  ],
  "skillGaps":[
@@ -87,19 +87,46 @@ Job Description:
 ${jobDescription}
 `;
 
+        // const response = await ai.models.generateContent({
+        //     model: "gemini-2.5-flash",
+        //     contents: prompt,
+        //     config: {
+        //         responseMimeType: "application/json",
+        //         responseSchema: zodToJsonSchema(interviewReportSchema),
+        //         temperature: 0.1,
+        //     }
+        // })
+
+        // const data = JSON.parse(response.text);
+        // console.log(data);
+        // return data;
+
+
+        const cleanJson = (text) => {
+            if (!text) throw new Error("Empty AI response");
+
+            return text
+                .replace(/```json/g, "")
+                .replace(/```/g, "")
+                .trim();
+        };
+
         const response = await ai.models.generateContent({
             model: "gemini-2.5-flash",
             contents: prompt,
             config: {
-                responseMimeType: "application/json",
                 responseSchema: zodToJsonSchema(interviewReportSchema),
                 temperature: 0.1,
             }
-        })
+        });
 
-        const data = JSON.parse(response.text);
-        console.log(data);
-        return data;
+        const cleaned = cleanJson(response.text);
+        const raw = JSON.parse(cleaned);
+
+        // optional validation
+        const validated = interviewReportSchema.parse(raw);
+
+        return validated;
 
     } catch (error) {
         console.log("Error in genereateInterviewReport", error)

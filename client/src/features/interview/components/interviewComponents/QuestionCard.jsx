@@ -10,6 +10,8 @@ const QuestionCard = () => {
     try {
       const res = await api.get("/api/interview/report");
       setReport(res.data.report);
+      // console.log(res.data.report);
+
     } catch (error) {
       console.log(error);
     }
@@ -26,9 +28,12 @@ const QuestionCard = () => {
       ? report.technicalQuestions
       : report.behavioralQuestions;
 
+  console.log("questions", questions);
+
+
   return (
     <div className="h-[70vh] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-900">
-      
+
       <div className="space-y-4">
         {questions.map((q, index) => (
           <div
@@ -38,19 +43,20 @@ const QuestionCard = () => {
             {/* Question */}
             <p className="font-semibold text-white text-sm sm:text-base">
               <span className="text-orange-400">Question: </span>
-              {q.questions}
+              {q.question}
             </p>
 
             {/* Intention */}
             <p className="text-xs sm:text-sm text-slate-400 mt-2">
               <span className="text-orange-300">🎯 Intention: </span>
-              {q.intention}
+              {q.intention
+              }
             </p>
 
             {/* Answer */}
             <p className="text-xs sm:text-sm text-blue-400 mt-2">
               <span className="text-blue-300">💡 Approach: </span>
-              {q.answers}
+              {q.answer}
             </p>
           </div>
         ))}

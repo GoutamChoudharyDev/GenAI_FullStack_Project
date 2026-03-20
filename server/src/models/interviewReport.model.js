@@ -2,7 +2,7 @@ import mongoose, { Schema } from 'mongoose';
 
 // Technical questions schema (sub schema)
 const technicalQuestionSchema = new Schema({
-    questions: {
+    question: {
         type: String,
         required: [true, "Technical question is required"]
     },
@@ -10,7 +10,7 @@ const technicalQuestionSchema = new Schema({
         type: String,
         required: [true, "Intention is required"]
     },
-    answers: {
+    answer: {
         type: String,
         required: [true, "Answers are required"]
     }
@@ -20,7 +20,7 @@ const technicalQuestionSchema = new Schema({
 
 // Behavioral questions schema (sub schema)
 const behavioralQuestionSchema = new Schema({
-    questions: {
+    question: {
         type: String,
         required: [true, "Technical question is required"]
     },
@@ -28,7 +28,7 @@ const behavioralQuestionSchema = new Schema({
         type: String,
         required: [true, "Intention is required"]
     },
-    answers: {
+    answer: {
         type: String,
         required: [true, "Answers are required"]
     }
@@ -52,7 +52,7 @@ const skillGapSchema = new Schema({
 )
 
 // preparation plan schema(sub schema)
-const preperationPlanSchema = new Schema({
+const preparationPlanSchema = new Schema({
     day: {
         type: Number,
         required: [true, "Day is required"]
@@ -65,7 +65,7 @@ const preperationPlanSchema = new Schema({
         type: String,
         required: [true, "Tasks are required"]
     }
-})
+}, { _id: false })
 
 // Define the InterviewReport schema(Main schema)
 const interviewReportSchema = new Schema({
@@ -87,7 +87,7 @@ const interviewReportSchema = new Schema({
     technicalQuestions: [technicalQuestionSchema],
     behavioralQuestions: [behavioralQuestionSchema],
     skillGaps: [skillGapSchema],
-    preparationPlan: [preperationPlanSchema],
+    preparationPlan: [preparationPlanSchema],
     user: {
         type: Schema.Types.ObjectId,
         ref: "User"
