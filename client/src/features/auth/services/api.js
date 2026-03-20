@@ -53,6 +53,7 @@ const getMe = async () => {
         return response.data;
     } catch (error) {
         console.log("getMe error : ", error);
+        return null;
     }
 }
 

@@ -99,7 +99,6 @@ ${jobDescription}
 
         const data = JSON.parse(response.text);
         console.log(data);
-        // console.log(typeof(data));
         return data;
 
     } catch (error) {

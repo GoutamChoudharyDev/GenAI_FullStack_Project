@@ -63,7 +63,6 @@ export const useAuth = () => {
         getAndSetUser();
     }, []);
 
-
     // return context and handlers
     return { user, loading, handleRegister, handleLogin, handleLogout };
 }

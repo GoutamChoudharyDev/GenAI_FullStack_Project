@@ -1,15 +1,15 @@
-import Breadcrumb from '../components/Breadcrumb'
-import FeatureCards from '../components/FeatureCards'
-import Header from '../components/Header'
-import JobDescription from '../components/JobDescription'
-import SelfDescription from '../components/SelfDescription'
-import UploadResume from '../components/UploadResume'
-import CTACard from '../components/CTACard'
+import Breadcrumb from '../components/homeComponents/Breadcrumb'
+import FeatureCards from '../components/homeComponents/FeatureCards'
+import Header from '../components/homeComponents/Header'
+import JobDescription from '../components/homeComponents/JobDescription'
+import SelfDescription from '../components/homeComponents/SelfDescription'
+import UploadResume from '../components/homeComponents/UploadResume'
+import CTACard from '../components/homeComponents/CTACard'
 
 const Home = () => {
     return (
         <main className="min-h-screen bg-[#242424]">
-            <div className="w-full px-8 py-12">
+            <div className="w-full md:px-20 px-6 md:py-12 py-8">
 
                 <Breadcrumb />
                 <Header />

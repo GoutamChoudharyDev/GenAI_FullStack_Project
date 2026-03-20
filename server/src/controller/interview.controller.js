@@ -88,4 +88,32 @@ const generateInterviewReportController = async (req, res) => {
     }
 }
 
-export { generateInterviewReportController }
+// getinterviewReport controller
+const getReportController = async (req, res) => {
+    try {
+        const report = await InterviewReport.findOne({
+            user: req.user.id
+        }).sort({ createdAt: -1 }); //latest report
+
+        if (!report) {
+            return res.status(404).json({
+                message: "Report not found"
+            })
+        }
+
+        return res.status(200).json({
+            message: "Report fetch successfully",
+            report
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: "Error getting interview report"
+        })
+    }
+}
+
+export {
+    generateInterviewReportController,
+    getReportController
+}
