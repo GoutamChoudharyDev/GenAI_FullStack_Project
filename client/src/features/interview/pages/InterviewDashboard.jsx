@@ -1,38 +1,44 @@
-import Sidebar from "../components/interviewComponents/Sidebar.jsx"
-import SkillGaps from "../components/interviewComponents/SkillGaps.jsx"
-import PreparationPlan from "../components/interviewComponents/PreparationPlan.jsx"
-import { interviewData } from "../../../data/interviewData.js"
-import Topbar from "../components/interviewComponents/Topbar.jsx"
-import QuestionCard from "../components/interviewComponents/QuestionCard.jsx"
+import Sidebar from "../components/interviewComponents/Sidebar.jsx";
+import SkillGaps from "../components/interviewComponents/SkillGaps.jsx";
+import Topbar from "../components/interviewComponents/Topbar.jsx";
+import QuestionCard from "../components/interviewComponents/QuestionCard.jsx";
 
 const InterviewDashboard = () => {
+  return (
+    <div className="flex min-h-screen bg-slate-950 text-white">
 
-    return (
-        <div className="flex bg-gray-800 min-h-screen">
+      {/* Sidebar (hidden on mobile) */}
+      <div className="hidden md:block">
+        <Sidebar />
+      </div>
 
-            <Sidebar />
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col">
 
-            {/* Main Content */}
-            <div className="flex-1 p-8 space-y-6">
-                {/* <Topbar /> */}
-                <h1 className="text-2xl font-bold">
-                    Technical Questions
-                </h1>
+        {/* Topbar */}
+        <Topbar />
 
-                <div className="grid gap-5">
-                    <QuestionCard />
-                </div>
+        <div className="p-4 sm:p-6 lg:p-8 space-y-6">
 
-            </div>
+          <h1 className="text-xl sm:text-2xl font-bold">
+            Technical Questions
+          </h1>
 
-            {/* Right Panel */}
-            <div className="w-80 p-6 space-y-6">
-                <SkillGaps skills={interviewData.skillGaps} />
-                <PreparationPlan plan={interviewData.preparationPlan} />
-            </div>
+          {/* Questions */}
+          <div className="grid gap-5">
+            <QuestionCard />
+          </div>
 
         </div>
-    )
-}
+      </div>
 
-export default InterviewDashboard
+      {/* Right Panel (hidden on small screens) */}
+      <div className="hidden lg:block w-80 p-6 border-l border-slate-800">
+        <SkillGaps />
+      </div>
+
+    </div>
+  );
+};
+
+export default InterviewDashboard;

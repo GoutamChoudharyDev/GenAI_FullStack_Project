@@ -33,7 +33,7 @@ const App = () => {
         />
 
         <Route
-          path="/interview"
+          path="/interview/:type"
           element={
             <ProtectedRoute>
               <InterviewDashboard />
@@ -41,17 +41,8 @@ const App = () => {
           }
         />
 
-        {/* <Route
-          path="/interview/technical"
-          element={
-            <ProtectedRoute>
-              <TechnicalQuestions />
-            </ProtectedRoute>
-          }
-        /> */}
-
         <Route
-          path="/interview/behavioral"
+          path="/interview/:type"
           element={
             <ProtectedRoute>
               <BehaviouralQuestions />

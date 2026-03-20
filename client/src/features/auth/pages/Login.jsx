@@ -17,7 +17,7 @@ const Login = () => {
         handleLogin({ email, password })
         setEmail("");
         setPassword("");
-        navigate("/");
+        navigate("/interview/technical");
     }
 
     // Loading state
