@@ -13,7 +13,9 @@ const app = express();
 app.use(cors({
     origin: [
         "http://localhost:5173",
-        "https://gen-ai-full-stack-project-298a1y5ab-goutam-choudhary-s-projects.vercel.app"
+        "https://gen-ai-full-stack-project-brown.vercel.app",
+        "https://gen-ai-full-stack-project-i01oojjiu-goutam-choudhary-s-projects.vercel.app",
+        "https://gen-ai-full-stack-project-298a1y5ab-goutam-choudhary-s-projects.vercel.app",
     ],
     credentials: true
 }));
