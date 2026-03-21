@@ -5,7 +5,6 @@ import { AuthProvider } from "./features/auth/AuthContext"
 import ProtectedRoute from "./features/auth/components/ProtectedRoute"
 import Home from "./features/interview/pages/Home"
 import InterviewDashboard from "./features/interview/pages/InterviewDashboard"
-import TechnicalQuestions from "./features/interview/pages/TechnicalQuestions"
 import BehaviouralQuestions from "./features/interview/pages/BehaviouralQuestions"
 import RoadMap from "./features/interview/pages/RoadMap"
 import { InterviewProvider } from "./features/auth/InterviewContext"
@@ -14,7 +13,6 @@ const App = () => {
   return (
     <AuthProvider>
       <InterviewProvider>
-
         <Routes>
           <Route
             path="/login"
