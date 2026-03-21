@@ -90,11 +90,19 @@ const loginUser = async (req, res) => {
         )
 
         // set JWT token in cookie
+        // res.cookie("token", token, {
+        //     httpOnly: true,
+        //     secure: process.env.NODE_ENV === "production",
+        //     maxAge: 24 * 60 * 60 * 1000 // 24 hours
+        // })
+
         res.cookie("token", token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            maxAge: 24 * 60 * 60 * 1000 // 24 hours
-        })
+            secure: true,           // ALWAYS true in production
+            sameSite: "None",       // MUST for cross-origin
+            maxAge: 24 * 60 * 60 * 1000,
+            path: "/"
+        });
 
         // return response
         return res
@@ -132,14 +140,20 @@ const logoutUser = async (req, res) => {
         await Blacklist.create({ token });
 
         // clear cookie
-        res.clearCookie("token");
+        // res.clearCookie("token");
+        res.clearCookie("token", {
+            httpOnly: true,
+            secure: true,
+            sameSite: "None",
+            path: "/"
+        });
 
         // return response
         return res.status(200).json({
             message: "User logged out successfully"
         })
     } catch (error) {
-
+        console.log(error);
     }
 }
 

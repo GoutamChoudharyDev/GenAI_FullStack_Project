@@ -17,6 +17,7 @@ const app = express();
 //     credentials: true
 // }));
 
+
 const allowedOrigins = [
     "http://localhost:5173",
     "https://gen-ai-full-stack-project-brown.vercel.app",
@@ -25,7 +26,7 @@ const allowedOrigins = [
 
 app.use(cors({
     origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
+        if (allowedOrigins.includes(origin)) {
             callback(null, true);
         } else {
             callback(new Error("CORS not allowed"));
@@ -33,6 +34,8 @@ app.use(cors({
     },
     credentials: true
 }));
+
+app.options("*", cors());
 
 // Parse cookies and JSON bodies
 app.use(cookieParser());
