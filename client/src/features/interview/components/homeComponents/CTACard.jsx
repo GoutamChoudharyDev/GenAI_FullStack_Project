@@ -6,12 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../auth/AuthContext";
 
 const CTACard = () => {
-    const { resumeFile, selfDesc, jobDesc } = useInterview();
+    const { resumeFile, selfDesc, jobDesc, setResumeFile, setSelfDesc, setJobDesc } = useInterview();
     const navigate = useNavigate();
 
-    // const [loading, setLoading] = useState(false);
-    const context = useContext(AuthContext);
-    const { loading, setLoading } = context;
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async () => {
         if (!resumeFile || !selfDesc || !jobDesc) {
@@ -30,11 +28,18 @@ const CTACard = () => {
             const res = await api.post("/api/interview/", formData);
 
             console.log(res.data);
+
+            // CLEAR DATA
+            setResumeFile(null);
+            setSelfDesc("");
+            setJobDesc("");
+
             navigate("/interview/technical");
+
         } catch (error) {
             console.log(error);
         } finally {
-            setLoading(false); // 👈 enable again (optional)
+            setLoading(false);
         }
     };
 
@@ -50,7 +55,7 @@ const CTACard = () => {
 
             <button
                 onClick={handleSubmit}
-                disabled={loading} // 👈 disable here
+                disabled={loading}
                 className={`px-8 py-4 rounded-lg flex items-center gap-2 
                 ${loading ? "bg-gray-500 cursor-not-allowed" : "bg-pink-600 hover:bg-pink-700"}`}
             >
