@@ -12,7 +12,7 @@ const app = express();
 // CORS Enable
 app.use(cors({
     // origin: "http://localhost:5173",
-    origin: "*",
+    origin: "https://gen-ai-full-stack-project-git-main-goutam-choudhary-s-projects.vercel.app/",
     // origin: "https://gen-ai-full-stack-project-brown.vercel.app/",
     credentials: true
 }));
