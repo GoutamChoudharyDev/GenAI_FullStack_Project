@@ -11,7 +11,8 @@ const app = express();
 // Middlewares...........................
 // CORS Enable
 app.use(cors({
-    origin: "http://localhost:5173",
+    // origin: "http://localhost:5173",
+    origin: "https://gen-ai-full-stack-project-brown.vercel.app/",
     credentials: true
 }));
 
