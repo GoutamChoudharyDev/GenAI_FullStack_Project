@@ -10,10 +10,27 @@ const app = express();
 
 // Middlewares...........................
 // CORS Enable
+// app.use(cors({
+//     // origin: "http://localhost:5173",
+//     origin: "https://gen-ai-full-stack-project-git-main-goutam-choudhary-s-projects.vercel.app/",
+//     // origin: "https://gen-ai-full-stack-project-brown.vercel.app/",
+//     credentials: true
+// }));
+
+const allowedOrigins = [
+    "http://localhost:5173",
+    "https://gen-ai-full-stack-project-brown.vercel.app",
+    "https://gen-ai-full-stack-project-298a1y5ab-goutam-choudhary-s-projects.vercel.app"
+];
+
 app.use(cors({
-    // origin: "http://localhost:5173",
-    origin: "https://gen-ai-full-stack-project-git-main-goutam-choudhary-s-projects.vercel.app/",
-    // origin: "https://gen-ai-full-stack-project-brown.vercel.app/",
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("CORS not allowed"));
+        }
+    },
     credentials: true
 }));
 
